@@ -37,10 +37,10 @@ export class LeaveStartPage {
     ]);
   }
 
-  async enterDate(): Promise<void> {
-    await this.day_input.fill("1");
-    await this.month_input.fill("1");
-    await this.year_input.fill("2024");
+  async enterDate(day: string, month: string, year: string): Promise<void> {
+    await this.day_input.fill(day);
+    await this.month_input.fill(month);
+    await this.year_input.fill(year);
   }
 
   async continueOn(): Promise<void> {

@@ -7,6 +7,7 @@ import EntitlementBasedOnPage from "./pages/entitlementBasedOnPage";
 import WorkOutHolidayPage from "./pages/workOutHolidayPage";
 import DaysWorkedPerWeekPage from "./pages/daysWorkedPerWeekPage";
 import SummaryPage from "./pages/summaryPage";
+import HoursWorkedPage from "./pages/hoursWorkedPage";
 
 test(`Your test - Task 1 - flow diagram 2`, async ({ page }): Promise<void> => {
   // Complete your first test here!
@@ -32,7 +33,7 @@ test(`Your test - Task 1 - flow diagram 2`, async ({ page }): Promise<void> => {
   // finally, add the steps below.
   const leaveStartpage: LeaveStartPage = new LeaveStartPage(page);
   await leaveStartpage.checkPageLoads();
-  await leaveStartpage.enterDate();
+  await leaveStartpage.enterDate("1", "1", "2024");
   await leaveStartpage.continueOn();
 
   // 3. Entitlement Based On Page
@@ -68,5 +69,33 @@ test(`Your test - Task 2 - flow diagram 3`, async ({ page }): Promise<void> => {
   // Navigate to the landing page
   await page.goto("https://www.gov.uk/calculate-your-holiday-entitlement");
 
-  // 1. Landing Page...
+  // 1. Landing Page
+  const landingPage: LandingPage = new LandingPage(page);
+  await landingPage.checkPageLoads();
+  await landingPage.continueOn();
+
+  // 2. Irregular Hours Page - Change this to click the "Yes" button instead of the "No" button.
+  const irregularHoursPage: IrregularHoursPage = new IrregularHoursPage(page);
+  await irregularHoursPage.checkPageLoads();
+  await irregularHoursPage.clickYesButton();
+  await irregularHoursPage.continueOn();
+
+  // 3. Leave Year Start Page
+  // You will need to 1 - create a new page object for this page in the 'pages' directory with methods for checking the page loads, entering a date, and continuing on.
+  // and 2 - create a content file in the 'content' directory
+  // finally, add the steps below.
+  const leaveStartpage: LeaveStartPage = new LeaveStartPage(page);
+  await leaveStartpage.checkPageLoads();
+  await leaveStartpage.enterDate("1", "5", "2024");
+  await leaveStartpage.continueOn();
+
+  const hoursWorkedPage: HoursWorkedPage = new HoursWorkedPage(page);
+  await hoursWorkedPage.checkPageLoads();
+  await hoursWorkedPage.enterHours("12");
+  await hoursWorkedPage.continueOn();
+
+  // 6. Summary Page
+  const summaryPage: SummaryPage = new SummaryPage(page);
+  await summaryPage.checkPageLoads();
+  await summaryPage.expectHoursWorkedSummary();
 });
