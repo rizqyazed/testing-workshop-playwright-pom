@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices } from "@playwright/test";
 
 module.exports = defineConfig({
   testDir: "./tests",
@@ -7,7 +7,7 @@ module.exports = defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: 4, // Set the number of retries for all projects
+  retries: 0, // Set the number of retries for all projects
 
   timeout: 5 * 60 * 1000, // How long before a test fails due to running for too long
   expect: {
@@ -21,7 +21,7 @@ module.exports = defineConfig({
   // How the tests will be reported, see playwright.dev reporters for more.
 
   use: {
-    baseURL: 'https://www.gov.uk/calculate-your-holiday-entitlement',
+    baseURL: "https://www.gov.uk/calculate-your-holiday-entitlement",
   },
 
   projects: [

@@ -1,18 +1,28 @@
 import { Page, type Locator } from "playwright";
 import { expect } from "@playwright/test";
-import summaryPage_content from "../content/summaryPage_content";
+import leaveTestPage_content from "../content/leaveTestPage_content";
 
-export class SummaryPage {
-  private readonly page: Page;
+export class LeaveStartPage {
   private readonly title: string;
+  private readonly page: Page;
   private readonly heading: string;
-  private readonly summary_result: Locator;
+  private readonly day_input: Locator;
+  private readonly month_input: Locator;
+  private readonly year_input: Locator;
+  private readonly continue_button: Locator;
+  private readonly error_message: string;
+  private readonly error_heading: string;
 
   constructor(page: Page) {
     this.page = page;
-    this.title = summaryPage_content.pageTitle;
-    this.heading = summaryPage_content.heading;
-    this.summary_result = page.locator(".summary");
+    this.title = leaveTestPage_content.pageTitle;
+    this.heading = leaveTestPage_content.heading;
+    this.day_input = page.locator("#response-0");
+    this.month_input = page.locator("#response-1");
+    this.year_input = page.locator("#response-2");
+    this.continue_button = page.getByRole("button", { name: "Continue" });
+    this.error_message = leaveTestPage_content.error_message;
+    this.error_heading = leaveTestPage_content.error_heading;
   }
 
   async checkPageLoads(): Promise<void> {
@@ -21,15 +31,21 @@ export class SummaryPage {
       await expect(
         this.page.getByRole("heading", { name: this.heading }),
       ).toBeVisible(),
-      await expect(
-        this.page.getByText(summaryPage_content.information_text),
-      ).toBeVisible(),
+      await expect(this.day_input).toBeEmpty(),
+      await expect(this.month_input).toBeEmpty(),
+      await expect(this.year_input).toBeEmpty(),
     ]);
   }
 
-  async expectSummary(expectedText: string): Promise<void> {
-    await expect(this.summary_result).toContainText(expectedText);
+  async enterDate(): Promise<void> {
+    await this.day_input.fill("1");
+    await this.month_input.fill("1");
+    await this.year_input.fill("2024");
+  }
+
+  async continueOn(): Promise<void> {
+    await this.continue_button.click();
   }
 }
 
-export default SummaryPage;
+export default LeaveStartPage;
