@@ -22,7 +22,7 @@ test(`Your test - Task 1 - flow diagram 2`, async ({ page }): Promise<void> => {
     // 2. Irregular Hours Page - Change this to click the "Yes" button instead of the "No" button.
     const irregularHoursPage: IrregularHoursPage = new IrregularHoursPage(page);
     await irregularHoursPage.checkPageLoads();
-    await irregularHoursPage.clickYesButton();
+    await irregularHoursPage.clickYesButton();  
     await irregularHoursPage.continueOn();
 
     // 3. Leave Year Start Page 
