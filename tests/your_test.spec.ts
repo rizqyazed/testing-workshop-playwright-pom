@@ -2,6 +2,7 @@ import { test } from "@playwright/test";
 // import all the page objects you need here...
 import LandingPage from "./pages/landingPage";
 import IrregularHoursPage from "./pages/irregularHoursPage";
+import leaveTestPage from "./pages/leaveTestPage";
 import EntitlementBasedOnPage from "./pages/entitlementBasedOnPage";
 import WorkOutHolidayPage from "./pages/workOutHolidayPage";
 import DaysWorkedPerWeekPage from "./pages/daysWorkedPerWeekPage";
@@ -29,6 +30,8 @@ test(`Your test - Task 1 - flow diagram 2`, async ({ page }): Promise<void> => {
     // You will need to 1 - create a new page object for this page in the 'pages' directory with methods for checking the page loads, entering a date, and continuing on.
     // and 2 - create a content file in the 'content' directory
     // finally, add the steps below.
+    const leaveTestPage: leaveTestPage = new leaveTestPage(page);
+    await leaveTestPage.
 
 
 
